@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64
+from rcl_interfaces.msg import SetParametersResult
 
 class jointSimulator:
     
@@ -97,7 +98,6 @@ class jointSimulatorNode(Node):
             else:
                 self.get_logger().warn(f"Unknown parameter: {param.name}")
         # Returnerer en rcl_interfaces.msg.SetParametersResult
-        from rcl_interfaces.msg import SetParametersResult
         return SetParametersResult(successful=successful)
     
 
