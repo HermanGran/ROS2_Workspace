@@ -28,15 +28,28 @@ class jointSimulatorNode(Node):
     def __init__(self):
         super().__init__("joint_simulator")
 
+        # Creating Parameters
+        self.declare_parameter('K', 230.0)
+        self.declare_parameter('T', 0.15)
+        self.declare_parameter('Noise', 0.0)
+
+        K_val = self.get_parameter('K').value
+        T_val = self.get_parameter('T').value
+        Noise_val = self.get_parameter('Noise').value
+
         # Creating instance of simulator
-        self.simulator = jointSimulator(K=230.0, T=0.15, noise=0.0)
+
+        self.simulator = jointSimulator(K=K_val, T=T_val, noise=Noise_val)
+
+        # Parameters callback
+        self.add_on_set_parameters_callback(self.parameter_callback)
 
         # Creates publisher
         self.publisher_ = self.create_publisher(Float64, "Angle", 10)
 
         self.subscription_ = self.create_subscription(
             Float64,
-            "inupt_voltage",
+            "voltage",
             self.voltage_listener,
             10
         )
@@ -58,7 +71,34 @@ class jointSimulatorNode(Node):
         angle_msg.data = self.simulator.angle
 
         self.publisher_.publish(angle_msg)
+
         # self.get_logger().info(f"Publishing angle: {angle_msg.data}")
+
+    def parameter_callback(self, params):
+        successful = True
+        for param in params:
+            if param.name == 'K':
+                self.simulator.K = float(param.value)
+                self.get_logger().info(f"K updated to {self.simulator.K}")
+            elif param.name == 'T':
+                if param.value <= 0.0:
+                    self.get_logger().warn("T must be > 0, ignoring update.")
+                    successful = False
+                else:
+                    self.simulator.T = float(param.value)
+                    self.get_logger().info(f"T updated to {self.simulator.T}")
+            elif param.name == 'Noise':
+                if param.value < 0.0:
+                    self.get_logger().warn("noise cannot be negative, ignoring update.")
+                    successful = False
+                else:
+                    self.simulator.noise = float(param.value)
+                    self.get_logger().info(f"noise updated to {self.simulator.noise}")
+            else:
+                self.get_logger().warn(f"Unknown parameter: {param.name}")
+        # Returnerer en rcl_interfaces.msg.SetParametersResult
+        from rcl_interfaces.msg import SetParametersResult
+        return SetParametersResult(successful=successful)
     
 
 

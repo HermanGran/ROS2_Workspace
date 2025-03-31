@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'joint_simulator = joint_simulator.joint_simulator_node:main'
+            'joint_simulator = joint_simulator.joint_simulator_node:main',
+            'minimal_parameter_node = joint_simulator.python_parameters:main'
         ],
     },
 )
