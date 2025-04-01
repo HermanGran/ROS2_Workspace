@@ -13,7 +13,7 @@ class PIDControllerNode(Node):
         self.declare_parameter('p', 1.0)
         self.declare_parameter('i', 0.0)
         self.declare_parameter('d', 0.0)
-        self.declare_parameter('reference', 1000.0)
+        self.declare_parameter('reference', 3.0)
 
         self.p = self.get_parameter('p').value
         self.i = self.get_parameter('i').value
