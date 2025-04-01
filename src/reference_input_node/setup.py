@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'tutorial_py_srvcli'
+package_name = 'reference_input_node'
 
 setup(
     name=package_name,
@@ -20,7 +20,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'service = reference_input_node.service_member_function:main',
             'client = reference_input_node.client_member_function:main',
         ],
     },

@@ -1,37 +1,48 @@
 import sys
 
-from example_interfaces.srv import AddTwoInts
+from pid_controller_msgs import SetReference
 import rclpy
 from rclpy.node import Node
 
 
-class MinimalClientAsync(Node):
+class ReferenceInputNode(Node):
 
     def __init__(self):
         super().__init__('minimal_client_async')
-        self.cli = self.create_client(AddTwoInts, 'add_two_ints')
+        self.cli = self.create_client(SetReference, 'set_reference')
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
-        self.req = AddTwoInts.Request()
+        self.req = SetReference.Request()
 
-    def send_request(self, a, b):
-        self.req.a = a
-        self.req.b = b
+    def send_request(self, reference):
+        self.req.a = reference
         return self.cli.call_async(self.req)
 
 
 def main():
     rclpy.init()
+    node = ReferenceInputNode()
 
-    minimal_client = MinimalClientAsync()
-    future = minimal_client.send_request(int(sys.argv[1]), int(sys.argv[2]))
-    rclpy.spin_until_future_complete(minimal_client, future)
-    response = future.result()
-    minimal_client.get_logger().info(
-        'Result of add_two_ints: for %d + %d = %d' %
-        (int(sys.argv[1]), int(sys.argv[2]), response.sum))
+    try:
+        while rclpy.ok():
+            user_input = input("Set new reference\n")
+            try:
+                reference = float(user_input)
+            except ValueError:
+                print("Invalid input, try again:")
+                continue
+            
+            future = node.send_request(reference)
+            rclpy.spin_until_future_complete(node, future)
+            response = future.result()
+            if response.success:
+                node.get_logger().info(f"Reference updated to: {reference:.2f}")
+            else:
+                node.get_logger().warn(f"Invalid reference value: {reference:.2f} (outside [-π, π])")
+    except KeyboardInterrupt:
+        print("Shutting down...")
 
-    minimal_client.destroy_node()
+    node.destroy_node
     rclpy.shutdown()
 
 
