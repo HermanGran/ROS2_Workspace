@@ -30,7 +30,7 @@ class PIDControllerNode(Node):
         self.srv = self.create_service(SetReference, 'set_reference', self.set_reference_callback)
 
         # ROS2 Publisher og Subscriber
-        self.publisher_ = self.create_publisher(Float64, 'voltage', 10)
+        self.publisher_ = self.create_publisher(Float64, 'voltage', 2)
         self.subscription = self.create_subscription(
             Float64,
             'Angle',
@@ -89,5 +89,4 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
 
