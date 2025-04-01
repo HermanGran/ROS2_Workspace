@@ -16,8 +16,8 @@ def generate_launch_description():
             output='screen'
         ),
         Node(
-            package='reference_input',
-            executable='reference_input_node',
+            package='reference_input_node',
+            executable='client',
             name='reference_input_node',
             output='screen'
         )
