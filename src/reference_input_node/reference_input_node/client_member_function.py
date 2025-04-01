@@ -1,6 +1,6 @@
 import sys
 
-from pid_controller_msgs import SetReference
+from pid_controller_msgs.srv import SetReference
 import rclpy
 from rclpy.node import Node
 
@@ -8,14 +8,14 @@ from rclpy.node import Node
 class ReferenceInputNode(Node):
 
     def __init__(self):
-        super().__init__('minimal_client_async')
+        super().__init__('reference_input_node')
         self.cli = self.create_client(SetReference, 'set_reference')
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
         self.req = SetReference.Request()
 
     def send_request(self, reference):
-        self.req.a = reference
+        self.req.request = reference
         return self.cli.call_async(self.req)
 
 
@@ -25,7 +25,7 @@ def main():
 
     try:
         while rclpy.ok():
-            user_input = input("Set new reference\n")
+            user_input = input("Set new reference: ")
             try:
                 reference = float(user_input)
             except ValueError:
@@ -42,7 +42,7 @@ def main():
     except KeyboardInterrupt:
         print("Shutting down...")
 
-    node.destroy_node
+    node.destroy_node()
     rclpy.shutdown()
 
 
