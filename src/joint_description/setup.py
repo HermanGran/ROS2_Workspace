@@ -9,6 +9,7 @@ setup(
     data_files=[
         ('share/' + package_name + '/launch', ['launch/view_model.launch.py']),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/urdf', ['urdf/joint_model.urdf']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

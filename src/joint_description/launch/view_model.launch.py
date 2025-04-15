@@ -1,11 +1,19 @@
-from launch import LaunchDescription
-from launch_ros.actions import Node
 import os
 
+from launch import LaunchDescription
+from launch_ros.actions import Node
+from launch.substitutions import LaunchConfiguration
+from launch.actions import DeclareLaunchArgument
+from ament_index_python.packages import get_package_share_directory
+
+
 def generate_launch_description():
-    robot_description_content = '''<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
-        <link name="world"/>
-    </robot>'''
+
+    robot_description_content = os.path.join(
+        get_package_share_directory('joint_description'),
+        'urdf',
+        'joint_model.urdf'
+    )
 
     return LaunchDescription([
         Node(
