@@ -2,13 +2,13 @@
 <robot name="joint_model">
 
   <!-- world -->
-  <link name="world"/>
+  <link name="map"/>
 
   <!-- base_link -->
   <link name="base_link"/>
 
   <joint name="base_joint" type="fixed">
-    <parent link="world"/>
+    <parent link="map"/>
     <child link="base_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
