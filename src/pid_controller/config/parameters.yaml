@@ -1,4 +1,5 @@
-ros__parameters:
-  Noise: 0.0
-  K: 230.0
-  T: 0.15
+/joint_simulator:
+  ros__parameters:
+    Noise: 0.0
+    K: 230.0
+    T: 0.15
