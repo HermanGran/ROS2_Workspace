@@ -32,7 +32,7 @@ def generate_launch_description():
         ),
         Node(
             package='joint_simulator',
-            executable='joint_simulator',
+            executable='joint_simulator_node',
             name='joint_simulator',
             output='screen',
             parameters=[config]
