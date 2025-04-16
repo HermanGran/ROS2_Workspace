@@ -157,7 +157,6 @@ rosdep-install.log
 *.launch.py~
 *.yaml~
 *.params.yaml~
-*.rviz
 *.db3
 
 # === VSCode ===
