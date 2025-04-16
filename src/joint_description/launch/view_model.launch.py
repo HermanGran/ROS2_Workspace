@@ -18,7 +18,8 @@ def generate_launch_description():
             package='robot_state_publisher',
             executable='robot_state_publisher',
             output='screen',
-            parameters=[{'robot_description': robot_description_content}]
+            parameters=[{'robot_description': urdf_path}],
+            arguments=[urdf_path]
         ),
         Node(
             package='rviz2',
