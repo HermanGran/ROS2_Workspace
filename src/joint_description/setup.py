@@ -13,6 +13,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/urdf', ['urdf/joint_model.urdf']),
         ('share/' + package_name + '/urdf', ['urdf/joint_model.macro.urdf']),
+        ('share/' + package_name + '/config', ['config/config.rviz'])
     ],
     install_requires=['setuptools'],
     zip_safe=True,
