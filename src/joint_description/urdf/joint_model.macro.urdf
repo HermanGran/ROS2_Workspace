@@ -37,7 +37,7 @@
     </visual>
   </link>
 
-  <joint name="angle" type="revolute">
+  <joint name="${prefix}_angle" type="revolute">
     <parent link="${prefix}_stator_link"/>
     <child link="${prefix}_rotor_link"/>
     <origin xyz="0 0 0.051" rpy="0 0 0"/>
@@ -46,7 +46,7 @@
   </joint>
 
   <xacro:property name="angle_size" value="0.025 0.002 0.002" />
-  <link name="angle_link">
+  <link name="${prefix}_angle_link">
     <visual>
       <geometry>
         <box size="${angle_size}"/>

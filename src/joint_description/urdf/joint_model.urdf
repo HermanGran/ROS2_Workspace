@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<xacro:include filename="$(find joint_description)/urdf/joint_model.macro.urdf"/>
-<robot name="joint_model">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="joint_model">
+
+  <xacro:include filename="$(find joint_description)/urdf/joint_model.macro.urdf"/>
+  <!--xacro:include filename="$(dirname)/urdf/joint_model.macro.urdf"/-->
 
   <link name="world"/>
-
   <link name="base_link"/>
-
 
   <xacro:joint_model prefix="cool" />
 
