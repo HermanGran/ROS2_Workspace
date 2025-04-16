@@ -8,6 +8,8 @@ setup(
     packages=[package_name],
     data_files=[
         ('share/' + package_name + '/launch', ['launch/view_model.launch.py']),
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/urdf', ['urdf/joint_model.urdf']),
         ('share/' + package_name + '/urdf', ['urdf/joint_model.macro.urdf']),
