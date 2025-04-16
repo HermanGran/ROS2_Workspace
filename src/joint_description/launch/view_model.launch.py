@@ -12,7 +12,7 @@ def generate_launch_description():
     model_path = PathJoinSubstitution([
         FindPackageShare('joint_description'),
         'urdf',
-        'joint_model.macro.urdf'  # ← bytt til .xacro hvis du lager det senere
+        'joint_model.urdf'  # ← bytt til .xacro hvis du lager det senere
     ])
 
     # Sti til RViz-konfigfil
