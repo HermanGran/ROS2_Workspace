@@ -1,68 +1,12 @@
 <?xml version="1.0"?>
+<xacro:include filename="$(find joint_description)/urdf/joint_model.macro.urdf"/>
 <robot name="joint_model">
 
   <link name="world"/>
 
   <link name="base_link"/>
 
-  <joint name="base_joint" type="fixed">
-    <parent link="map"/>
-    <child link="base_link"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
 
-  <link name="stator_link">
-    <visual>
-      <geometry>
-        <box size="0.102 0.102 0.102"/>
-      </geometry>
-      <material name="black">
-        <color rgba="0 0 0 1"/>
-      </material>
-    </visual>
-  </link>
-
-  <joint name="stator_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="stator_link"/>
-    <origin xyz="0 0 0.051" rpy="0 0 0"/>
-  </joint>
-
-  <link name="rotor_link">
-    <visual>
-      <geometry>
-        <cylinder radius="0.025" length="0.01"/>
-      </geometry>
-      <material name="red">
-        <color rgba="1 0 0 1"/>
-      </material>
-    </visual>
-  </link>
-
-  <joint name="angle" type="revolute">
-    <parent link="stator_link"/>
-    <child link="rotor_link"/>
-    <origin xyz="0 0 0.051" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="1" lower="-3.14" upper="3.14"/>
-  </joint>
-
-  <link name="angle_link">
-    <visual>
-      <geometry>
-        <box size="0.025 0.002 0.002"/>
-      </geometry>
-      <origin xyz="0.0125 0 0.006" rpy="0 0 0"/>
-      <material name="white">
-        <color rgba="1 1 1 1"/>
-      </material>
-    </visual>
-  </link>
-
-  <joint name="indicator" type="fixed">
-    <parent link="rotor_link"/>
-    <child link="angle_link"/>
-    <origin xyz="0 0 0.005" rpy="0 0 0"/>
-  </joint>
+  <xacro:joint_model prefix="cool" />
 
 </robot>
