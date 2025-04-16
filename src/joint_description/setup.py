@@ -13,7 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='matswj',
+    maintainer='matsjen',
     maintainer_email='matswiikjensen@gmail.no',
     description='Package for URDF visualization in RViz',
     license='TODO',
