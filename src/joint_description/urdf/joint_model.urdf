@@ -1,10 +1,8 @@
 <?xml version="1.0"?>
 <robot name="joint_model">
 
-  <!-- world -->
-  <link name="map"/>
+  <link name="world"/>
 
-  <!-- base_link -->
   <link name="base_link"/>
 
   <joint name="base_joint" type="fixed">
@@ -13,7 +11,6 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
-  <!-- stator -->
   <link name="stator_link">
     <visual>
       <geometry>
@@ -31,7 +28,6 @@
     <origin xyz="0 0 0.051" rpy="0 0 0"/>
   </joint>
 
-  <!-- rotor -->
   <link name="rotor_link">
     <visual>
       <geometry>
@@ -51,7 +47,6 @@
     <limit effort="1" velocity="1" lower="-3.14" upper="3.14"/>
   </joint>
 
-  <!-- angle -->
   <link name="angle_link">
     <visual>
       <geometry>
