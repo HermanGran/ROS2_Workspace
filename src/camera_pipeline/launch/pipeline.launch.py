@@ -8,5 +8,19 @@ def generate_launch_description():
             executable='rectify_node',
             name='rectify_node',
             output='screen'
+        ),
+
+        Node(
+            package='camera_pipeline',
+            executable='gaussian_blur',
+            name='gaussian_blur',
+            output='screen'
+        ),
+
+        Node(
+            package='camera_pipeline',
+            executable='canny_edge',
+            name='canny_edge',
+            output='screen'
         )
     ])
