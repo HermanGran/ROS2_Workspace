@@ -10,13 +10,13 @@ class CannyEdgeNode(Node):
 
         self.subscription = self.create_subscription(
             Image,
-            "image_blurred",
+            "image_raw",
             self.image_callback,
             10)
 
         self.publisher = self.create_publisher(
             Image,
-            'output_image',
+            'image_blurred',
             10)
 
         self.bridge = CvBridge()
