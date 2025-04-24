@@ -14,14 +14,14 @@ class GaussianBlurNode(Node):
         # Subscribe to a image topic
         self.subscription = self.create_subscription(
             Image,
-            "image_rect",
+            "image_raw",
             self.image_callback,
             10)
 
         # Publish the filtered image
         self.publisher = self.create_publisher(
             Image,
-            'image_blurred',
+            'image_output',
             10)
 
         self.bridge = CvBridge()
