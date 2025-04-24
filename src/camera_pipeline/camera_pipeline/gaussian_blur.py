@@ -14,7 +14,7 @@ class GaussianBlurNode(Node):
         # Subscribe to a image topic
         self.subscription = self.create_subscription(
             Image,
-            "image_raw",
+            "image_rect",
             self.image_callback,
             10)
 

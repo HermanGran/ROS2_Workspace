@@ -10,7 +10,7 @@ class CannyEdgeNode(Node):
 
         self.subscription = self.create_subscription(
             Image,
-            "image_raw",
+            "image_blurred",
             self.image_callback,
             10)
 
